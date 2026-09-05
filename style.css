@@ -90,18 +90,25 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-/* Bakiye gizle/göster butonu - cüzdanın solunda */
+/* Bakiye gizle/göster - navbar sonunda ayrı menü, cüzdandan uzak */
+.is-bal-li {
+  display: flex !important;
+  align-items: center;
+  list-style: none;
+}
 .is-bal-toggle {
-  background: transparent !important;
-  border: 0 !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 17px;
-  line-height: 1;
-  padding: 2px 4px;
-  margin-left: 0;
-  margin-right: 6px;
-  opacity: 1;
-  vertical-align: middle;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.is-bal-toggle:hover {
+  background: rgba(255,255,255,0.12) !important;
 }
 /* Gizli mod sayfa yüklenir yüklenmez CSS ile uygulanır (JS beklemez) */
 .is-bal-hidden .Wallet .floating.ui.green.label,

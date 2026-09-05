@@ -108,33 +108,32 @@
       else if (hide && cur !== '*******' && /\d/.test(cur)) el.dataset.balOrig = cur;
       el.textContent = hide ? '*******' : (el.dataset.balOrig || cur);
     });
-    document.querySelectorAll('li.bakiyeDropdown').forEach(li => {
-      let btn = li.querySelector('.is-bal-toggle');
-      if (!btn) {
-        btn = document.createElement('button');
+    // eski cüzdan içi butonları temizle
+    document.querySelectorAll('li.bakiyeDropdown .is-bal-toggle').forEach(b => b.remove());
+    // navbar-right sonunda ayrı li (cüzdandan uzak, sepettin sonrası)
+    document.querySelectorAll('ul.navbar-right').forEach(ul => {
+      let li = ul.querySelector(':scope > li.is-bal-li');
+      if (!li) {
+        li = document.createElement('li');
+        li.className = 'is-bal-li';
+        const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'is-bal-toggle';
         btn.title = 'Bakiyeyi gizle/göster';
-        const stop = (e) => { e.stopPropagation(); };
-        btn.addEventListener('mousedown', stop);
-        btn.addEventListener('mouseup', stop);
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
           const nowHidden = !isBalHidden();
           setBalHidden(nowHidden);
           try { document.documentElement.classList.toggle('is-bal-hidden', nowHidden); } catch(err) {}
-          document.querySelectorAll('.is-bal-toggle').forEach(t => t.textContent = nowHidden ? '🙈' : '👁');
+          document.querySelectorAll('.is-bal-toggle').forEach(t => t.textContent = nowHidden ? 'Göster' : 'Gizle');
           maskBalances();
         });
-        const w = li.querySelector('.Wallet');
-        if (w && w.before) w.before(btn);
-        else li.prepend(btn);
+        li.appendChild(btn);
+        ul.appendChild(li);
       }
-      // buton cüzdanın solunda dursun (eski sağdakileri taşı)
-      const w = li.querySelector('.Wallet');
-      if (w && btn.nextElementSibling !== w && w.before) w.before(btn);
-      btn.textContent = hide ? '🙈' : '👁';
+      const btn = li.querySelector('.is-bal-toggle');
+      if (btn) btn.textContent = hide ? 'Göster' : 'Gizle';
     });
   }
 
