@@ -96,8 +96,14 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   align-items: center;
   list-style: none;
 }
+.is-bal-li:hover,
+.is-bal-li:focus,
+.is-bal-li:active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
 .is-bal-toggle {
-  background: rgba(255,255,255,0.06) !important;
+  background: transparent !important;
   border: 1px solid rgba(255,255,255,0.12) !important;
   border-radius: 6px;
   cursor: pointer;
@@ -113,7 +119,7 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   align-self: center;
 }
 .is-bal-toggle:hover {
-  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.3) !important;
 }
 /* Gizli mod sayfa yüklenir yüklenmez CSS ile uygulanır (JS beklemez) */
 .is-bal-hidden .Wallet .floating.ui.green.label,
