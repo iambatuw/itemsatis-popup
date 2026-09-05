@@ -13,10 +13,11 @@ Chrome / Brave / Edge uzantısı — ItemSatış sohbet deneyimini iyileştirir.
 
 ## Kurulum
 
-1. `chrome://extensions` adresini aç
-2. Sağ üstten **Geliştirici modu**'nu etkinleştir
-3. **Paketlenmemiş öğe yükle** → bu klasörü seç
-4. `www.itemsatis.com` üzerinde çalışır
+1. [Releases](https://github.com/iambatuw/itemsatis-popup/releases) sayfasından son sürümün zip dosyasını indirip bir klasöre ayıkla
+2. `chrome://extensions` adresini aç
+3. Sağ üstten **Geliştirici modu**'nu etkinleştir
+4. **Paketlenmemiş öğe yükle** → ayıkladığın klasörü seç
+5. `www.itemsatis.com` üzerinde çalışır
 
 ## Dosyalar
 
