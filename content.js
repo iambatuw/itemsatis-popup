@@ -81,12 +81,51 @@
     debounce = setTimeout(() => {
       const c = getUnreadFromDOM();
       updateHeader(c);
+      maskBalances();
     }, 150);
   });
 
+  // Bakiye gizle/göster - cüzdan etiketi + dropdown bakiyeleri, seçim hatırlanır
+  const BAL_KEY = 'is_bal_hidden';
+  const BAL_SEL = '.Wallet .floating.ui.green.label, .item-user .user-text span, .blokeBakiyeDiv .badge';
+  function isBalHidden() {
+    try { return localStorage.getItem(BAL_KEY) === '1'; } catch(e) { return false; }
+  }
+  function setBalHidden(v) {
+    try { localStorage.setItem(BAL_KEY, v ? '1' : '0'); } catch(e) {}
+  }
+  function maskBalances() {
+    const hide = isBalHidden();
+    document.querySelectorAll(BAL_SEL).forEach(el => {
+      const cur = el.textContent;
+      if (!el.dataset.balOrig) el.dataset.balOrig = cur;
+      else if (hide && cur !== '*******' && /\d/.test(cur)) el.dataset.balOrig = cur;
+      el.textContent = hide ? '*******' : (el.dataset.balOrig || cur);
+    });
+    document.querySelectorAll('.Wallet').forEach(w => {
+      let btn = w.querySelector('.is-bal-toggle');
+      if (!btn) {
+        btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'is-bal-toggle';
+        btn.title = 'Bakiyeyi gizle/göster';
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const nowHidden = !isBalHidden();
+          setBalHidden(nowHidden);
+          document.querySelectorAll('.is-bal-toggle').forEach(t => t.textContent = nowHidden ? '🙈' : '👁');
+          maskBalances();
+        });
+        w.appendChild(btn);
+      }
+      btn.textContent = hide ? '🙈' : '👁';
+    });
+  }
+
   function startObserve() {
     observer.observe(document.body, { childList: true, subtree: true });
-    setTimeout(() => updateHeader(getUnreadFromDOM()), 800);
+    setTimeout(() => { updateHeader(getUnreadFromDOM()); maskBalances(); }, 800);
     setInterval(markMiniChat, 1000);
     markMiniChat();
   }
@@ -105,5 +144,5 @@
   } else {
     startObserve();
   }
-  setInterval(() => updateHeader(getUnreadFromDOM()), 2000);
+  setInterval(() => { updateHeader(getUnreadFromDOM()); maskBalances(); }, 2000);
 })();

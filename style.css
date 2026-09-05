@@ -90,6 +90,20 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   visibility: hidden !important;
   pointer-events: none !important;
 }
+/* Bakiye gizle/göster butonu */
+.is-bal-toggle {
+  background: transparent !important;
+  border: 0 !important;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0 2px;
+  margin-left: 2px;
+  opacity: 0.7;
+}
+.is-bal-toggle:hover {
+  opacity: 1;
+}
 #sidebar-widget-content,
 #sidebar-widget-nav {
   opacity: 0 !important;
