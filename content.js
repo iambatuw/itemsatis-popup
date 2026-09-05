@@ -34,9 +34,9 @@
       badge.textContent = '0';
       icon.appendChild(badge);
     } else {
-      // eski site class'larını temizle (rozeti büyütüyorlardı)
+      // eski site class'larını ve kopyalanmış inline stilleri temizle
       badge.classList.remove('floating', 'ui', 'red', 'label');
-      badge.style.margin = '';
+      badge.removeAttribute('style');
     }
     return badge;
   }
@@ -98,27 +98,6 @@
     const style = window.getComputedStyle(frame);
     const isMini = style.position === 'fixed' || style.position === 'absolute';
     frame.classList.toggle('is-mini', isMini);
-    syncBadgeGeometry();
-  }
-
-  // Kırmızı badge'in konum + ölçüsünü mavi bildirim rozetinden kopyala - birebir aynı hiza
-  function syncBadgeGeometry() {
-    const blue = document.querySelector('#nav-notif-v2-wrap .floating.ui.blue.label, .Notifications .floating.ui.blue.label');
-    if (!blue) return;
-    const cs = window.getComputedStyle(blue);
-    document.querySelectorAll('.is-header-chat-badge.show').forEach(b => {
-      b.style.top = cs.top;
-      b.style.bottom = cs.bottom;
-      b.style.left = cs.left;
-      b.style.right = cs.right;
-      b.style.transform = cs.transform;
-      b.style.fontSize = cs.fontSize;
-      b.style.height = cs.height;
-      b.style.minWidth = cs.minWidth;
-      b.style.padding = cs.padding;
-      b.style.lineHeight = cs.lineHeight;
-      b.style.borderRadius = cs.borderRadius;
-    });
   }
 
   if (document.readyState === 'loading') {

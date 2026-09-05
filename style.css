@@ -1,14 +1,16 @@
-/* Header chat badge - kendi stilimiz, site class'ına bağımlı değil */
+/* Header chat badge - sabit ölçü, esnemez */
 .is-badge-host {
   position: relative !important;
+  display: inline-block !important;
 }
 .is-header-chat-badge {
   display: none !important;
   position: absolute !important;
-  top: auto;
+  top: auto !important;
   bottom: -6px;
-  left: auto;
-  right: -6px;
+  left: auto !important;
+  right: -8px;
+  width: auto !important;
   min-width: 20px;
   height: 20px;
   padding: 0 6px;
@@ -18,6 +20,7 @@
   font-weight: 700;
   line-height: 20px;
   text-align: center;
+  white-space: nowrap;
   border-radius: 9999px;
   pointer-events: none !important;
   z-index: 20;
