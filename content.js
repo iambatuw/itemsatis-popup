@@ -108,32 +108,34 @@
       else if (hide && cur !== '*******' && /\d/.test(cur)) el.dataset.balOrig = cur;
       el.textContent = hide ? '*******' : (el.dataset.balOrig || cur);
     });
-    // eski cüzdan içi butonları temizle
-    document.querySelectorAll('li.bakiyeDropdown .is-bal-toggle').forEach(b => b.remove());
-    // navbar-right sonunda ayrı li (cüzdandan uzak, sepettin sonrası)
-    document.querySelectorAll('ul.navbar-right').forEach(ul => {
-      let li = ul.querySelector(':scope > li.is-bal-li');
-      if (!li) {
-        li = document.createElement('li');
-        li.className = 'is-bal-li';
-        const btn = document.createElement('button');
+    // eski navbar sonu butonlarını temizle
+    document.querySelectorAll('li.is-bal-li').forEach(el => el.remove());
+    // cüzdanın hemen yanına kompakt buton
+    document.querySelectorAll('li.bakiyeDropdown').forEach(li => {
+      const w = li.querySelector('.Wallet');
+      if (!w) return;
+      let btn = li.querySelector(':scope > .is-bal-toggle');
+      if (!btn) {
+        btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'is-bal-toggle';
         btn.title = 'Bakiyeyi gizle/göster';
+        const stop = (e) => { e.stopPropagation(); };
+        btn.addEventListener('mousedown', stop);
+        btn.addEventListener('mouseup', stop);
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
           const nowHidden = !isBalHidden();
           setBalHidden(nowHidden);
           try { document.documentElement.classList.toggle('is-bal-hidden', nowHidden); } catch(err) {}
-          document.querySelectorAll('.is-bal-toggle').forEach(t => t.textContent = nowHidden ? 'Göster' : 'Gizle');
+          document.querySelectorAll('.is-bal-toggle').forEach(t => t.textContent = nowHidden ? 'Bakiye Göster' : 'Bakiye Gizle');
           maskBalances();
         });
-        li.appendChild(btn);
-        ul.appendChild(li);
+        w.after(btn);
       }
-      const btn = li.querySelector('.is-bal-toggle');
-      if (btn) btn.textContent = hide ? 'Göster' : 'Gizle';
+      if (btn.previousElementSibling !== w) w.after(btn);
+      btn.textContent = hide ? 'Bakiye Göster' : 'Bakiye Gizle';
     });
   }
 
