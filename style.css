@@ -95,6 +95,10 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   display: flex !important;
   align-items: center;
   list-style: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 0 !important;
 }
 .is-bal-li:hover,
 .is-bal-li:focus,
