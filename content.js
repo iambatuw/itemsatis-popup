@@ -113,21 +113,25 @@
       else if (hide && cur !== '*******' && /\d/.test(cur)) el.dataset.balOrig = cur;
       el.textContent = hide ? '*******' : (el.dataset.balOrig || cur);
     });
-    // eski navbar sonu butonlarını temizle
-    document.querySelectorAll('li.is-bal-li').forEach(el => el.remove());
-    // cüzdanın hemen yanına kompakt buton
+    // yanlış yerde kalmış wrapleri temizle (cüzdan li'sinin hemen sonrasında olmayanlar)
+    document.querySelectorAll('li.is-bal-li').forEach(el => {
+      const prev = el.previousElementSibling;
+      if (!prev || !prev.classList || !prev.classList.contains('bakiyeDropdown')) el.remove();
+    });
+    // cüzdan içi eski butonları temizle
+    document.querySelectorAll('li.bakiyeDropdown .is-bal-toggle').forEach(b => b.remove());
+    // cüzdan li'sinin DIŞINA, hemen yanına ayrı li (hover/tıklama alanına girmez)
     document.querySelectorAll('li.bakiyeDropdown').forEach(li => {
-      const w = li.querySelector('.Wallet');
-      if (!w) return;
-      let btn = li.querySelector(':scope > .is-bal-toggle');
-      if (!btn) {
-        btn = document.createElement('button');
+      const ul = li.parentElement;
+      if (!ul) return;
+      let wrap = li.nextElementSibling;
+      if (!wrap || !wrap.classList || !wrap.classList.contains('is-bal-li')) {
+        wrap = document.createElement('li');
+        wrap.className = 'is-bal-li';
+        const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'is-bal-toggle';
         btn.title = 'Bakiyeyi gizle/göster';
-        const stop = (e) => { e.stopPropagation(); };
-        btn.addEventListener('mousedown', stop);
-        btn.addEventListener('mouseup', stop);
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -137,10 +141,11 @@
           document.querySelectorAll('.is-bal-toggle').forEach(t => setBalIcon(t, nowHidden));
           maskBalances();
         });
-        w.after(btn);
+        wrap.appendChild(btn);
+        li.after(wrap);
       }
-      if (btn.previousElementSibling !== w) w.after(btn);
-      setBalIcon(btn, hide);
+      const btn = wrap.querySelector('.is-bal-toggle');
+      if (btn) setBalIcon(btn, hide);
     });
   }
 

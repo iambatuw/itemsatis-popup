@@ -90,7 +90,12 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-/* Bakiye gizle/göster - diğer header iconları gibi sade göz ikonu */
+/* Bakiye gizle/göster - cüzdan li'sinin DIŞINDA, hemen yanında ayrı li */
+.is-bal-li {
+  display: flex !important;
+  align-items: center;
+  list-style: none;
+}
 .is-bal-toggle {
   background: transparent !important;
   border: 0 !important;
