@@ -29,7 +29,3 @@ Chrome / Brave / Edge uzantısı — ItemSatış sohbet deneyimini iyileştirir.
 ## Katman sırası
 
 `profil/bildirim dropdown (100000)` > `mini chat (90000)` > `navbar barı` > `sayfa içeriği`
-
-## Lisans
-
-MIT
