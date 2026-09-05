@@ -1,5 +1,11 @@
 // content.js - header badge + DOM observer
 (function() {
+  // Gizli mod sayfa yüklenir yüklenmez uygulansın (göz kırpması olmasın)
+  try {
+    if (localStorage.getItem('is_bal_hidden') === '1' && document.documentElement) {
+      document.documentElement.classList.add('is-bal-hidden');
+    }
+  } catch(e) {}
   const s = document.createElement('script');
   s.src = chrome.runtime.getURL('injected.js');
   s.onload = () => s.remove();
@@ -102,29 +108,35 @@
       else if (hide && cur !== '*******' && /\d/.test(cur)) el.dataset.balOrig = cur;
       el.textContent = hide ? '*******' : (el.dataset.balOrig || cur);
     });
-    document.querySelectorAll('.Wallet').forEach(w => {
-      let btn = w.querySelector('.is-bal-toggle');
+    document.querySelectorAll('li.bakiyeDropdown').forEach(li => {
+      let btn = li.querySelector('.is-bal-toggle');
       if (!btn) {
         btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'is-bal-toggle';
         btn.title = 'Bakiyeyi gizle/göster';
+        const stop = (e) => { e.stopPropagation(); };
+        btn.addEventListener('mousedown', stop);
+        btn.addEventListener('mouseup', stop);
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
           const nowHidden = !isBalHidden();
           setBalHidden(nowHidden);
+          try { document.documentElement.classList.toggle('is-bal-hidden', nowHidden); } catch(err) {}
           document.querySelectorAll('.is-bal-toggle').forEach(t => t.textContent = nowHidden ? '🙈' : '👁');
           maskBalances();
         });
-        w.appendChild(btn);
+        const w = li.querySelector('.Wallet');
+        if (w && w.after) w.after(btn);
+        else li.appendChild(btn);
       }
       btn.textContent = hide ? '🙈' : '👁';
     });
   }
 
   function startObserve() {
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
     setTimeout(() => { updateHeader(getUnreadFromDOM()); maskBalances(); }, 800);
     setInterval(markMiniChat, 1000);
     markMiniChat();

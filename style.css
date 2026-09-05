@@ -90,19 +90,29 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-/* Bakiye gizle/göster butonu */
+/* Bakiye gizle/göster butonu - cüzdan li'sinin yanında */
 .is-bal-toggle {
   background: transparent !important;
   border: 0 !important;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1;
   padding: 0 2px;
-  margin-left: 2px;
-  opacity: 0.7;
-}
-.is-bal-toggle:hover {
+  margin-left: 4px;
   opacity: 1;
+  vertical-align: middle;
+}
+/* Gizli mod sayfa yüklenir yüklenmez CSS ile uygulanır (JS beklemez) */
+.is-bal-hidden .Wallet .floating.ui.green.label,
+.is-bal-hidden .item-user .user-text span,
+.is-bal-hidden .blokeBakiyeDiv .badge {
+  font-size: 0 !important;
+}
+.is-bal-hidden .Wallet .floating.ui.green.label::after,
+.is-bal-hidden .item-user .user-text span::after,
+.is-bal-hidden .blokeBakiyeDiv .badge::after {
+  content: '*******';
+  font-size: 12px;
 }
 #sidebar-widget-content,
 #sidebar-widget-nav {
