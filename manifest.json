@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "ItemSatis Header Chat Badge",
+  "version": "1.0",
+  "description": "Üst header'daki sohbet ikonuna (mesajlarim) okunmamış mesaj sayısını kırmızı badge olarak ekler - ChatV2 ile uyumlu",
+  "permissions": [],
+  "host_permissions": ["https://www.itemsatis.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.itemsatis.com/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": ["https://www.itemsatis.com/*"]
+    }
+  ]
+}

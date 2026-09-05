@@ -1,0 +1,85 @@
+/* Header chat badge - sitenin mavi rozetiyle aynı stil (floating ui label) */
+.is-badge-host {
+  position: relative !important;
+}
+.is-header-chat-badge {
+  display: none !important;
+  background: #ef4444 !important;
+  color: #fff !important;
+  pointer-events: none !important;
+  z-index: 20;
+  font-family: Inter, Arial, sans-serif;
+}
+.is-header-chat-badge.show {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chat mini widget navbar barının üstünde, dropdown menüler chat'in üstünde */
+header,
+header nav,
+#bs-example-navbar-collapse-1 {
+  z-index: auto !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+.chat-v2-frame.is-mini {
+  z-index: 90000 !important;
+  overflow: visible !important;
+}
+.Hesabim .menu,
+.bakiyeDropdown .menu,
+.Cart .menu,
+#nav-notif-dropdown {
+  z-index: 100000 !important;
+}
+/* Kullanıcı bilgisi paneli içi scroll */
+#user-info-window > div.h-full {
+  overflow-y: auto !important;
+}
+
+[src*="https://cdn.itemsatis.com/uploads/admin/1gT2rutEBDGF9wY7ANnJvcqya.png"],
+#close-firsatlar,
+alfa-livechat,
+#desktop-banner-container,
+#desktop-banner-container > .flex.w-full.h-full,
+#desktop-banner-container a {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+button:has(path[d="M6 18L18 6M6 6l12 12"]),
+a:has(path[d="M6 18L18 6M6 6l12 12"]) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+#sidebar-widget-content,
+#sidebar-widget-nav {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+#chat-conversation-list .chat-item.chat-item-itemai.p-\[12px\].rounded-\[8px\].hover\:bg-white\/5.cursor-pointer.group.transition-colors.relative.overflow-hidden.transition-\[opacity\,transform\,max-height\,padding\,margin\,visibility\].duration-\[280ms\].ease-out.max-h-\[120px\] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+#sidebar-widget-container .mt-\[16px\].pt-\[20px\].border-t.border-white\/\[0\.08\] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
