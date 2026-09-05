@@ -90,15 +90,16 @@ a:has(path[d="M6 18L18 6M6 6l12 12"]) {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-/* Bakiye gizle/göster butonu - cüzdan li'sinin yanında */
+/* Bakiye gizle/göster butonu - cüzdanın solunda */
 .is-bal-toggle {
   background: transparent !important;
   border: 0 !important;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1;
-  padding: 0 2px;
-  margin-left: 4px;
+  padding: 2px 4px;
+  margin-left: 0;
+  margin-right: 6px;
   opacity: 1;
   vertical-align: middle;
 }

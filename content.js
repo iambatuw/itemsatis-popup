@@ -128,9 +128,12 @@
           maskBalances();
         });
         const w = li.querySelector('.Wallet');
-        if (w && w.after) w.after(btn);
-        else li.appendChild(btn);
+        if (w && w.before) w.before(btn);
+        else li.prepend(btn);
       }
+      // buton cüzdanın solunda dursun (eski sağdakileri taşı)
+      const w = li.querySelector('.Wallet');
+      if (w && btn.nextElementSibling !== w && w.before) w.before(btn);
       btn.textContent = hide ? '🙈' : '👁';
     });
   }
