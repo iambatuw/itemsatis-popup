@@ -1,11 +1,24 @@
-/* Header chat badge - sitenin mavi rozetiyle aynı stil (floating ui label) */
+/* Header chat badge - kendi stilimiz, site class'ına bağımlı değil */
 .is-badge-host {
   position: relative !important;
 }
 .is-header-chat-badge {
   display: none !important;
+  position: absolute !important;
+  top: auto;
+  bottom: -6px;
+  left: auto;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
   background: #ef4444 !important;
   color: #fff !important;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 9999px;
   pointer-events: none !important;
   z-index: 20;
   font-family: Inter, Arial, sans-serif;

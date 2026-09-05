@@ -30,11 +30,13 @@
     let badge = icon.querySelector('.is-header-chat-badge');
     if (!badge) {
       badge = document.createElement('span');
-      badge.className = 'is-header-chat-badge floating ui red label';
+      badge.className = 'is-header-chat-badge';
       badge.textContent = '0';
       icon.appendChild(badge);
-    } else if (!badge.classList.contains('floating')) {
-      badge.classList.add('floating', 'ui', 'red', 'label');
+    } else {
+      // eski site class'larını temizle (rozeti büyütüyorlardı)
+      badge.classList.remove('floating', 'ui', 'red', 'label');
+      badge.style.margin = '';
     }
     return badge;
   }
@@ -99,7 +101,7 @@
     syncBadgeGeometry();
   }
 
-  // Kırmızı badge'in konumunu mavi bildirim rozetinden kopyala - birebir aynı hiza
+  // Kırmızı badge'in konum + ölçüsünü mavi bildirim rozetinden kopyala - birebir aynı hiza
   function syncBadgeGeometry() {
     const blue = document.querySelector('#nav-notif-v2-wrap .floating.ui.blue.label, .Notifications .floating.ui.blue.label');
     if (!blue) return;
@@ -110,7 +112,12 @@
       b.style.left = cs.left;
       b.style.right = cs.right;
       b.style.transform = cs.transform;
-      b.style.margin = cs.margin;
+      b.style.fontSize = cs.fontSize;
+      b.style.height = cs.height;
+      b.style.minWidth = cs.minWidth;
+      b.style.padding = cs.padding;
+      b.style.lineHeight = cs.lineHeight;
+      b.style.borderRadius = cs.borderRadius;
     });
   }
 
